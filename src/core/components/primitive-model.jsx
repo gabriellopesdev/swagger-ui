@@ -41,6 +41,10 @@ export default class Primitive extends Component {
     return <span className="model">
       <span className="prop">
         { name && <span className={`${depth === 1 && "model-title"} prop-name`}>{ title }</span> }
+        {
+          !description ? null :
+            <Markdown source={ description } />
+        }
         <span className="prop-type">{ type }</span>
         { format && <span className="prop-format">(${format})</span>}
         {
@@ -48,11 +52,7 @@ export default class Primitive extends Component {
         }
         {
           showExtensions && extensions.size ? extensions.entrySeq().map( ( [ key, v ] ) => <Property key={`${key}-${v}`} propKey={ key } propVal={ v } propClass={ propClass } />) : null
-        }
-        {
-          !description ? null :
-            <Markdown source={ description } />
-        }
+        }       
         {
           xml && xml.size ? (<span><br /><span className={ propClass }>xml:</span>
             {

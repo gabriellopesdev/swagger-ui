@@ -127,6 +127,7 @@ table.model
 
         &.property-row
         {
+            
             &.required td:first-child
             {
                 font-weight: bold;
@@ -135,7 +136,7 @@ table.model
             td
             {
                 vertical-align: top;
-
+                padding-top: 20px !important;
                 &:first-child
                 {
                     padding-right: 0.2em;

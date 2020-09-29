@@ -1,0 +1,2877 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Freedom Integra GT",
+    "description": "API para realizar a integração com aplicação GT",
+    "contact": {
+      "name": "Proansi Tecnologia",
+      "url": "http://www.proansi.com.br"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://10.0.0.5:17591/freedomintegragtapihomologacao/freedomintegragtapihomologacao.dll/freedom/integ/metodos"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Animais"
+    },
+    {
+      "name": "Autorizacoes"
+    },
+    {
+      "name": "Pessoas"
+    },
+    {
+      "name": "Ping"
+    },
+    {
+      "name": "Unidade"
+    },
+    {
+      "name": "Veiculos"
+    }
+  ],
+  "paths": {
+    "/ping/": {
+      "get": {
+        "tags": [
+          "Ping"
+        ],
+        "summary": "Testar resposta da API",
+        "description": "Consome um método de teste da API para validar se ela está Online e respondendo",
+        "operationId": "pingGetMetodo",
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sPing_get_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Unidade/{Quadra}/{Lote}": {
+      "get": {
+        "tags": [
+          "Unidade"
+        ],
+        "summary": "Consulta dos vinculos das unidades",
+        "description": "Método para consultar o cadastro de uma unidade e seus respectivos vinculos com pessoas, veículos e animais (Quadra+Lote será o identificador comum)",
+        "operationId": "UnidadeGetMetodo",
+        "parameters": [
+          {
+            "name": "Quadra",
+            "in": "path",
+            "description": "Quadra em que a unidade se encontra",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 5
+            }
+          },
+          {
+            "name": "Lote",
+            "in": "path",
+            "description": "Lote em que a unidade se encontra",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 5
+            }
+          }
+        ],
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sUnidade_get_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Pessoas/{Id_Pessoa}": {
+      "get": {
+        "tags": [
+          "Pessoas"
+        ],
+        "summary": "Consulta pessoas",
+        "description": "Método para consultar o cadastro de uma pessoa (Id do Freedom será o identificador comum)",
+        "operationId": "PessoasGetMetodo",
+        "parameters": [
+          {
+            "name": "Id_Pessoa",
+            "in": "path",
+            "description": "Código do cadastro da pessoa",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sPessoas_getpost_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Pessoas/": {
+      "post": {
+        "tags": [
+          "Pessoas"
+        ],
+        "summary": "Vincula pessoas",
+        "description": "Método para vincular o cadastro de uma pessoa a uma unidade e devolve o Id",
+        "operationId": "PessoasPostMetodo",
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sPessoas_post_requestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sPessoas_getpost_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Pessoas"
+        ],
+        "summary": "Altera pessoas",
+        "description": "Método para alterar o cadastro de uma pessoa",
+        "operationId": "PessoasPutMetodo",
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sPessoas_put_requestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sPessoas_put_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Autorizacoes/": {
+      "post": {
+        "tags": [
+          "Autorizacoes"
+        ],
+        "summary": "Vincula autorizações",
+        "description": "Método para vincular o cadastro de um empregado a uma unidade (Caso não exista, faz um novo cadastro de pessoa, vincula a unidade, faz a autorização e devolve o ID. Caso o CPF do empregado seja informado, e no momento da inclusão já exista no sistema, o cadastro com o CPF já existente será considerado mais importante e vinculado a unidade)",
+        "operationId": "AutorizacoesPostMetodo",
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sAutorizacoes_post_requestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sAutorizacoes_post_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Autorizacoes"
+        ],
+        "summary": "Altera autorizações",
+        "description": "Método para alterar o cadastro de um empregado",
+        "operationId": "AutorizacoesPutMetodo",
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sAutorizacoes_put_requestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sAutorizacoes_put_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/CancelarAutorizacao/": {
+      "put": {
+        "tags": [
+          "Autorizacoes"
+        ],
+        "summary": "Desvincula autorizações",
+        "description": "Método para desvincular o cadastro de um empregado a uma unidade e revoga sua autorização",
+        "operationId": "CancelarAutorizacaoPutMetodo",
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sCancelarAutorizacao_put_requestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sCancelarAutorizacao_put_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Veiculos/": {
+      "post": {
+        "tags": [
+          "Veiculos"
+        ],
+        "summary": "Vincula veículos",
+        "description": "Método para vincular o cadastro de um veículo a uma unidade (Caso não exista a placa, faz um novo cadastro e devolve o Id. Caso já exista no sistema, o cadastro existente será considerado mais importante e vinculado a unidade)",
+        "operationId": "VeiculosPostMetodo",
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sVeiculos_post_requestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sVeiculos_post_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Veiculos"
+        ],
+        "summary": "Altera veículos",
+        "description": "Método para alterar o cadastro de um veículo",
+        "operationId": "VeiculosPutMetodo",
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sVeiculos_put_requestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sVeiculos_put_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Veiculos/{Placa_Veiculo}/{Quadra}/{Lote}": {
+      "delete": {
+        "tags": [
+          "Veiculos"
+        ],
+        "summary": "Desvincula veículos",
+        "description": "Método para desvincular o cadastro de um veículo de uma unidade",
+        "operationId": "VeiculosDeleteMetodo",
+        "parameters": [
+          {
+            "name": "Placa_Veiculo",
+            "in": "path",
+            "description": "Placa do veículo",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 7
+            }
+          },
+          {
+            "name": "Quadra",
+            "in": "path",
+            "description": "Quadra em que o veículo se encontra",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 5
+            }
+          },
+          {
+            "name": "Lote",
+            "in": "path",
+            "description": "Lote em que o veículo se encontra",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 5
+            }
+          }
+        ],
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sVeiculos_delete_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Animais/": {
+      "post": {
+        "tags": [
+          "Animais"
+        ],
+        "summary": "Vincula animais",
+        "description": "Método para vincular o cadastro de um animal a uma unidade (Faz um novo cadastro e devolve o ID)",
+        "operationId": "AnimalPostMetodo",
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sAnimais_post_requestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sAnimais_post_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Animais"
+        ],
+        "summary": "Altera animais",
+        "description": "Método para alterar o cadastro de um animal",
+        "operationId": "AnimaisPutMetodo",
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/sAnimais_put_requestBody"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sAnimais_put_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/Animais/{Id_Animal}/{Quadra}/{Lote}": {
+      "delete": {
+        "tags": [
+          "Animais"
+        ],
+        "summary": "Desvincula animais",
+        "description": "Método para desvincular e excluir o cadastro de um animal de uma unidade",
+        "operationId": "AnimaisDeleteMetodo",
+        "parameters": [
+          {
+            "name": "Id_Animal",
+            "in": "path",
+            "description": "Código do cadastro do animal",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "Quadra",
+            "in": "path",
+            "description": "Quadra em que o animal se encontra",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 5
+            }
+          },
+          {
+            "name": "Lote",
+            "in": "path",
+            "description": "Lote em que o animal se encontra",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "maxLength": 5
+            }
+          }
+        ],
+        "security": [
+          {
+            "freedomBasic": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Operação executada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/sAnimais_delete_responses"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro",
+            "content": {}
+          },
+          "401": {
+            "description": "Usuário não autorizado",
+            "content": {}
+          },
+          "403": {
+            "description": "Acesso negado",
+            "content": {}
+          },
+          "500": {
+            "description": "Método não localizado ou API offline",
+            "content": {}
+          },
+          "default": {
+            "description": "Erro inesperado",
+            "content": {}
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "sHorarios01": {
+        "type": "object",
+        "properties": {
+          "SEQAUTORIZACAO": {
+            "description": "Sequência do cadastro da autorização",
+            "type": "integer",
+            "format": "int32",
+            "example": 101
+          },
+          "DIA_SEMANA": {
+            "description": "Dia da semanda da autorização",
+            "type": "string",
+            "maxLength": 8,
+            "enum": [
+              "SEGUNDA",
+              "TERÇA",
+              "QUARTA",
+              "QUINTA",
+              "SEXTA",
+              "SABADO",
+              "DOMINGO",
+              "FERIADOS"
+            ]
+          },
+          "HORA_INICIO": {
+            "description": "Hora do início da autorização",
+            "type": "string",
+            "maxLength": 5,
+            "example": "06:00"
+          },
+          "HORA_TERMINO": {
+            "description": "Hora do término da autorização",
+            "type": "string",
+            "maxLength": 5,
+            "example": "10:55"
+          },
+          "TURNO": {
+            "description": "Número que indica se é primeiro(1) ou segundo(2) turno",
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          }
+        }
+      },
+      "sHorarios02": {
+        "type": "object",
+        "properties": {
+          "DIA_SEMANA": {
+            "description": "Dia da semanda da autorização",
+            "type": "string",
+            "maxLength": 8,
+            "enum": [
+              "SEGUNDA",
+              "TERÇA",
+              "QUARTA",
+              "QUINTA",
+              "SEXTA",
+              "SABADO",
+              "DOMINGO",
+              "FERIADOS"
+            ]
+          },
+          "HORA_INICIO": {
+            "description": "Hora do início da autorização",
+            "type": "string",
+            "maxLength": 5,
+            "example": "06:00"
+          },
+          "HORA_TERMINO": {
+            "description": "Hora do término da autorização",
+            "type": "string",
+            "maxLength": 5,
+            "example": "10:55"
+          },
+          "TURNO": {
+            "description": "Número que indica se é primeiro(1) ou segundo(2) turno",
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          }
+        },
+        "required": [
+          "DIA_SEMANA",
+          "HORA_INICIO",
+          "HORA_TERMINO",
+          "TURNO"
+        ]
+      },
+      "sPessoa01": {
+        "type": "object",
+        "properties": {
+          "NOME": {
+            "description": "Nome da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "JOSE ALFREDO DA SILVA"
+          },
+          "RG": {
+            "description": "RG da pessoa",
+            "type": "string",
+            "maxLength": 15,
+            "example": "1524660"
+          },
+          "EMAIL": {
+            "description": "E-Mail da pessoa",
+            "type": "string",
+            "maxLength": 50,
+            "example": "josealv@bol.com.br"
+          },
+          "TITULAR": {
+            "description": "Indica se é titular da unidade",
+            "type": "string",
+            "maxLength": 1,
+            "example": "S"
+          },
+          "TEL_RESIDENCIAL": {
+            "description": "Telefone residencial da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "17 32158800"
+          },
+          "TEL_COMERCIAL": {
+            "description": "Telefone comercial da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "17 32256621"
+          },
+          "TEL_CELULAR": {
+            "description": "Telefone celular da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "17 984156547"
+          }
+        }
+      },
+      "sPessoa02": {
+        "type": "object",
+        "properties": {
+          "SEQUENCIA": {
+            "description": "Sequência do cadastro da autorização",
+            "type": "integer",
+            "format": "int32",
+            "example": 101
+          },
+          "NOME": {
+            "description": "Nome da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "JOSE ALFREDO DA SILVA"
+          },
+          "RG": {
+            "description": "RG da pessoa",
+            "type": "string",
+            "maxLength": 15,
+            "example": "1524660"
+          },
+          "EMAIL": {
+            "description": "E-Mail da pessoa",
+            "type": "string",
+            "maxLength": 50,
+            "example": "josealv@bol.com.br"
+          },
+          "PERMANENTE": {
+            "description": "Indica se é permanente a autorização",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "S",
+              "N"
+            ]
+          },
+          "DATA_INICIO_VALIDADE": {
+            "description": "Data de início da validade da autorização",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "01/01/2020"
+          },
+          "DATA_TERMINO_VALIDADE": {
+            "description": "Data do término da validade da autorização",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "30/01/2020"
+          },
+          "SEM_RESTRICAO_HORARIO": {
+            "description": "Indica se é sem restrições de dias e horários na autorização",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "S",
+              "N"
+            ]
+          },
+          "TEL_RESIDENCIAL": {
+            "description": "Telefone residencial da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "17 32158800"
+          },
+          "TEL_COMERCIAL": {
+            "description": "Telefone comercial da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "17 32256621"
+          },
+          "TEL_CELULAR": {
+            "description": "Telefone celular da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "17 984156547"
+          },
+          "HORARIOS": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sHorarios01"
+            }
+          }
+        }
+      },
+      "sUnidade": {
+        "type": "object",
+        "properties": {
+          "QUADRA": {
+            "description": "Quadra em que se encontra a unidade",
+            "type": "string",
+            "maxLength": 5,
+            "example": "A058"
+          },
+          "LOTE": {
+            "description": "Lote em que se encontra a unidade",
+            "type": "string",
+            "maxLength": 5,
+            "example": "65"
+          },
+          "PROPRIETARIO": {
+            "description": "Indica se o vínculo com a unidade da pessoa é de proprietário",
+            "type": "string",
+            "maxLength": 1,
+            "example": "S"
+          },
+          "INQUILINO": {
+            "description": "Indica se o vínculo com a unidade da pessoa é de inquilino",
+            "type": "string",
+            "maxLength": 1,
+            "example": "N"
+          },
+          "MORADOR": {
+            "description": "Indica se o vínculo com a unidade da pessoa é de Morador",
+            "type": "string",
+            "maxLength": 1,
+            "example": "S"
+          },
+          "RESPONSAVEL": {
+            "description": "Indica se o vínculo com a unidade da pessoa é de responsável",
+            "type": "string",
+            "maxLength": 1,
+            "example": "S"
+          },
+          "TITULAR": {
+            "description": "Indica se o vínculo com a unidade da pessoa é de titular",
+            "type": "string",
+            "maxLength": 1,
+            "example": "S"
+          },
+          "PERMITE_CONCEDER_AUTORIZACAO": {
+            "description": "Indica se é permitido conceder autorização de acesso a outras pessoas",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "S",
+              "N"
+            ]
+          }
+        }
+      },
+      "sVeiculo": {
+        "type": "object",
+        "properties": {
+          "PLACA": {
+            "description": "Placa do veículo",
+            "type": "string",
+            "maxLength": 7,
+            "example": "JAS1587"
+          },
+          "MARCA": {
+            "description": "Marca do veículo",
+            "type": "string",
+            "maxLength": 25,
+            "example": "FIAT"
+          },
+          "COR": {
+            "description": "Cor do veículo",
+            "type": "string",
+            "maxLength": 25,
+            "example": "Preto"
+          },
+          "MODELO": {
+            "description": "Modelo do veículo",
+            "type": "string",
+            "maxLength": 25,
+            "example": "Uno"
+          }
+        }
+      },
+      "sAnimais": {
+        "type": "object",
+        "properties": {
+          "NOME": {
+            "description": "Nome do animal",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Zoram"
+          },
+          "TIPO": {
+            "description": "Classificação do tipo de animal",
+            "type": "string",
+            "maxLength": 40,
+            "enum": [
+              "AVE",
+              "CACHORRO",
+              "GATO",
+              "OUTRO"
+            ]
+          },
+          "RACA": {
+            "description": "Raça do animal",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Sem raça definida"
+          },
+          "ID_MICROCHIP": {
+            "description": "Código de identificação do MicroChip",
+            "type": "string",
+            "maxLength": 20,
+            "example": "U152333"
+          },
+          "COR_PREDOMINANTE": {
+            "description": "Cor predominante do animal",
+            "type": "string",
+            "maxLength": 30,
+            "example": "Branco"
+          },
+          "SEXO": {
+            "description": "Sexo do animal",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "M",
+              "F"
+            ]
+          }
+        }
+      },
+      "sPing_get_responses": {
+        "type": "object",
+        "properties": {
+          "result": {
+            "type": "string",
+            "example": "pong!"
+          }
+        }
+      },
+      "sPessoas_getpost_responses": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "description": "Código do cadastro da pessoa",
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "NOME": {
+            "description": "Nome da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Bartolomeu Cardoso"
+          },
+          "CLASSIFICACAO": {
+            "description": "Classificação da pessoa na unidade",
+            "type": "string",
+            "maxLength": 22,
+            "enum": [
+              "ASSOCIADO",
+              "INQUILINO",
+              "FAMILIAR",
+              "PRESTADORES DE SERVICO"
+            ]
+          },
+          "RG": {
+            "description": "RG da pessoa",
+            "type": "string",
+            "maxLength": 15,
+            "example": "150087"
+          },
+          "EXPEDIDOR": {
+            "description": "Órgão expedidor do RG da pessoa",
+            "type": "string",
+            "maxLength": 10,
+            "example": "SJ"
+          },
+          "DATA_EXPEDICAO": {
+            "description": "Data de expedição do RG da pessoa",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "01/04/1998"
+          },
+          "CPF": {
+            "description": "CPF da pessoa",
+            "type": "string",
+            "maxLength": 11,
+            "example": "15488819858"
+          },
+          "DATA_NASCIMENTO": {
+            "description": "Data de nascimento da pessoa",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "15/04/1987"
+          },
+          "EMAIL": {
+            "description": "E-Mail da pessoa",
+            "type": "string",
+            "maxLength": 50,
+            "example": "bart@ig.com.br"
+          },
+          "FOTO": {
+            "description": "Foto da pessoa (* Máx. 1 mb e no formato jpg)",
+            "type": "string",
+            "format": "base64",
+            "example": ""
+          },
+          "TEL_RESIDENCIAL": {
+            "description": "Telefone residencial da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "1732258849"
+          },
+          "RAMAL_TEL_RESIDENCIAL": {
+            "description": "Ramal do Telefone residencial da pessoa",
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "TEL_COMERCIAL": {
+            "description": "Telefone comercial da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "1732256621"
+          },
+          "RAMAL_TEL_COMERCIAL": {
+            "description": "Ramal do Telefone comercial da pessoa",
+            "type": "integer",
+            "format": "int32",
+            "example": 12
+          },
+          "TEL_CELULAR": {
+            "description": "Telefone celular da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "17984006548"
+          },
+          "CEP": {
+            "description": "CEP do endereço da pessoa",
+            "type": "string",
+            "maxLength": 9,
+            "example": "15020305"
+          },
+          "ENDERECO": {
+            "description": "Endereço da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Rua das flores"
+          },
+          "NUMERO": {
+            "description": "Número do endereço da pessoa",
+            "type": "integer",
+            "format": "int32",
+            "example": 180
+          },
+          "BAIRRO": {
+            "description": "Bairro da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "Jardins"
+          },
+          "COMPLEMENTO": {
+            "description": "Complemento do endereço da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Apto. 18"
+          },
+          "CIDADE": {
+            "description": "Cidade da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "São José do Rio Preto"
+          },
+          "UF": {
+            "description": "UF da cidade da pessoa",
+            "type": "string",
+            "maxLength": 2,
+            "example": "SP"
+          },
+          "PAIS": {
+            "description": "País do endereço da pessoa",
+            "type": "string",
+            "maxLength": 20,
+            "example": "Brasil"
+          },
+          "PROFISSAO": {
+            "description": "Profissão da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Mecânico"
+          },
+          "EMPRESA": {
+            "description": "Empresa em que trabalha a pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Auto Centro de Automóveis"
+          },
+          "FUNCAO": {
+            "description": "Função exercida na empresa em que trabalha a pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Injeção eletrônica"
+          },
+          "UNIDADES": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sUnidade"
+            }
+          }
+        }
+      },
+      "sPessoas_put_requestBody": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "description": "Código do cadastro da pessoa",
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "NOME": {
+            "description": "Nome da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Bartolomeu Cardoso"
+          },
+          "CLASSIFICACAO": {
+            "description": "Classificação da pessoa na unidade",
+            "type": "string",
+            "maxLength": 22,
+            "enum": [
+              "ASSOCIADO",
+              "INQUILINO",
+              "FAMILIAR",
+              "PRESTADORES DE SERVICO"
+            ]
+          },
+          "RG": {
+            "description": "RG da pessoa",
+            "type": "string",
+            "maxLength": 15,
+            "example": "150087"
+          },
+          "EXPEDIDOR": {
+            "description": "Órgão expedidor do RG da pessoa",
+            "type": "string",
+            "maxLength": 10,
+            "example": "SJ"
+          },
+          "DATA_EXPEDICAO": {
+            "description": "Data de expedição do RG da pessoa",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "01/04/1998"
+          },
+          "CPF": {
+            "description": "CPF da pessoa",
+            "type": "string",
+            "maxLength": 11,
+            "example": "15488819858"
+          },
+          "DATA_NASCIMENTO": {
+            "description": "Data de nascimento da pessoa",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "15/04/1987"
+          },
+          "EMAIL": {
+            "description": "E-Mail da pessoa",
+            "type": "string",
+            "maxLength": 50,
+            "example": "bart@ig.com.br"
+          },
+          "FOTO": {
+            "description": "Foto da pessoa (* Máx. 1 mb e no formato jpg)",
+            "type": "string",
+            "format": "base64",
+            "example": ""
+          },
+          "TEL_RESIDENCIAL": {
+            "description": "Telefone residencial da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "1732258849"
+          },
+          "RAMAL_TEL_RESIDENCIAL": {
+            "description": "Ramal do Telefone residencial da pessoa",
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "TEL_COMERCIAL": {
+            "description": "Telefone comercial da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "1732256621"
+          },
+          "RAMAL_TEL_COMERCIAL": {
+            "description": "Ramal do Telefone comercial da pessoa",
+            "type": "integer",
+            "format": "int32",
+            "example": 12
+          },
+          "TEL_CELULAR": {
+            "description": "Telefone celular da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "17984006548"
+          },
+          "CEP": {
+            "description": "CEP do endereço da pessoa",
+            "type": "string",
+            "maxLength": 9,
+            "example": "15020305"
+          },
+          "ENDERECO": {
+            "description": "Endereço da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Rua das flores"
+          },
+          "NUMERO": {
+            "description": "Número do endereço da pessoa",
+            "type": "integer",
+            "format": "int32",
+            "example": 180
+          },
+          "BAIRRO": {
+            "description": "Bairro da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "Jardins"
+          },
+          "COMPLEMENTO": {
+            "description": "Complemento do endereço da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Apto. 18"
+          },
+          "CIDADE": {
+            "description": "Cidade da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "São José do Rio Preto"
+          },
+          "UF": {
+            "description": "UF da cidade da pessoa",
+            "type": "string",
+            "maxLength": 2,
+            "example": "SP"
+          },
+          "PAIS": {
+            "description": "País do endereço da pessoa",
+            "type": "string",
+            "maxLength": 20,
+            "example": "Brasil"
+          },
+          "PROFISSAO": {
+            "description": "Profissão da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Mecânico"
+          },
+          "EMPRESA": {
+            "description": "Empresa em que trabalha a pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Auto Centro de Automóveis"
+          },
+          "FUNCAO": {
+            "description": "Função exercida na empresa em que trabalha a pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Injeção eletrônica"
+          }
+        },
+        "required": [
+          "ID"
+        ]
+      },
+      "sPessoas_put_responses": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "description": "Código do cadastro da pessoa",
+            "type": "integer",
+            "format": "int32",
+            "example": 10
+          },
+          "MENSAGEM": {
+            "description": "Nome da pessoa",
+            "type": "string",
+            "example": "Registro alterado com sucesso"
+          }
+        }
+      },
+      "sPessoas_post_requestBody": {
+        "type": "object",
+        "properties": {
+          "NOME": {
+            "description": "Nome da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Bartolomeu Cardoso"
+          },
+          "CLASSIFICACAO": {
+            "description": "Classificação da pessoa na unidade",
+            "type": "string",
+            "maxLength": 22,
+            "enum": [
+              "ASSOCIADO",
+              "INQUILINO",
+              "FAMILIAR",
+              "PRESTADORES DE SERVICO"
+            ]
+          },
+          "RG": {
+            "description": "RG da pessoa",
+            "type": "string",
+            "maxLength": 15,
+            "example": "150087"
+          },
+          "EXPEDIDOR": {
+            "description": "Órgão expedidor do RG da pessoa",
+            "type": "string",
+            "maxLength": 10,
+            "example": "SJ"
+          },
+          "DATA_EXPEDICAO": {
+            "description": "Data de expedição do RG da pessoa",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "01/04/1998"
+          },
+          "CPF": {
+            "description": "CPF da pessoa",
+            "type": "string",
+            "maxLength": 11,
+            "example": "15488819858"
+          },
+          "DATA_NASCIMENTO": {
+            "description": "Data de nascimento da pessoa",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "15/04/1987"
+          },
+          "EMAIL": {
+            "description": "E-Mail da pessoa",
+            "type": "string",
+            "maxLength": 50,
+            "example": "bart@ig.com.br"
+          },
+          "FOTO": {
+            "description": "Foto da pessoa (* Máx. 1 mb e no formato jpg)",
+            "type": "string",
+            "format": "base64",
+            "example": ""
+          },
+          "TEL_RESIDENCIAL": {
+            "description": "Telefone residencial da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "1732258849"
+          },
+          "RAMAL_TEL_RESIDENCIAL": {
+            "description": "Ramal do Telefone residencial da pessoa",
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "TEL_COMERCIAL": {
+            "description": "Telefone comercial da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "1732256621"
+          },
+          "RAMAL_TEL_COMERCIAL": {
+            "description": "Ramal do Telefone comercial da pessoa",
+            "type": "integer",
+            "format": "int32",
+            "example": 12
+          },
+          "TEL_CELULAR": {
+            "description": "Telefone celular da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "17984006548"
+          },
+          "CEP": {
+            "description": "CEP do endereço da pessoa",
+            "type": "string",
+            "maxLength": 9,
+            "example": "15020305"
+          },
+          "ENDERECO": {
+            "description": "Endereço da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Rua das flores"
+          },
+          "NUMERO": {
+            "description": "Número do endereço da pessoa",
+            "type": "integer",
+            "format": "int32",
+            "example": 180
+          },
+          "BAIRRO": {
+            "description": "Bairro da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "Jardins"
+          },
+          "COMPLEMENTO": {
+            "description": "Complemento do endereço da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Apto. 18"
+          },
+          "CIDADE": {
+            "description": "Cidade da pessoa",
+            "type": "string",
+            "maxLength": 30,
+            "example": "São José do Rio Preto"
+          },
+          "UF": {
+            "description": "UF da cidade da pessoa",
+            "type": "string",
+            "maxLength": 2,
+            "example": "SP"
+          },
+          "PAIS": {
+            "description": "País do endereço da pessoa",
+            "type": "string",
+            "maxLength": 20,
+            "example": "Brasil"
+          },
+          "PROFISSAO": {
+            "description": "Profissão da pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Mecânico"
+          },
+          "EMPRESA": {
+            "description": "Empresa em que trabalha a pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Auto Centro de Automóveis"
+          },
+          "FUNCAO": {
+            "description": "Função exercida na empresa em que trabalha a pessoa",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Injeção eletrônica"
+          },
+          "UNIDADES": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sUnidade"
+            }
+          }
+        },
+        "required": [
+          "NOME",
+          "CLASSIFICACAO"
+        ]
+      },
+      "sAutorizacoes_post_requestBody": {
+        "type": "object",
+        "properties": {
+          "QUADRA": {
+            "description": "Quadra da autorização",
+            "type": "string",
+            "maxLength": 5,
+            "example": "BC18"
+          },
+          "LOTE": {
+            "description": "Lote da autorização",
+            "type": "string",
+            "maxLength": 5,
+            "example": "01"
+          },
+          "ID_PROPRIETARIO": {
+            "description": "Código do cadastro da pessoa que autorizou",
+            "type": "integer",
+            "format": "int32",
+            "example": 12
+          },
+          "NOME": {
+            "description": "Nome do autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Paulo Monteiro"
+          },
+          "RG": {
+            "description": "RG do autorizado",
+            "type": "string",
+            "maxLength": 15,
+            "example": "500984"
+          },
+          "EXPEDIDOR": {
+            "description": "Órgão expedidor do RG do autorizado",
+            "type": "string",
+            "maxLength": 10,
+            "example": "SJ"
+          },
+          "DATA_EXPEDICAO": {
+            "description": "Data de expedição do RG do autorizado",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "12/05/1990"
+          },
+          "CPF": {
+            "description": "CPF do autorizado",
+            "type": "string",
+            "maxLength": 11,
+            "example": "51480018653"
+          },
+          "DATA_NASCIMENTO": {
+            "description": "Data de nascimento do autorizado",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "22/10/1979"
+          },
+          "EMAIL": {
+            "description": "E-Mail do autorizado",
+            "type": "string",
+            "maxLength": 50,
+            "example": "paulomon@terra.com.br"
+          },
+          "FOTO": {
+            "description": "Foto da pessoa (* Máx. 1 mb e no formato jpg)",
+            "type": "string",
+            "format": "base64",
+            "example": ""
+          },
+          "TEL_RESIDENCIAL": {
+            "description": "Telefone residencial do autorizado",
+            "type": "string",
+            "maxLength": 30,
+            "example": "1732450054"
+          },
+          "RAMAL_TEL_RESIDENCIAL": {
+            "description": "Ramal do Telefone residencial do autorizado",
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "TEL_COMERCIAL": {
+            "description": "Telefone comercial do autorizado",
+            "type": "string",
+            "maxLength": 30,
+            "example": "1732455887"
+          },
+          "RAMAL_TEL_COMERCIAL": {
+            "description": "Ramal do Telefone comercial do autorizado",
+            "type": "integer",
+            "format": "int32",
+            "example": 12
+          },
+          "TEL_CELULAR": {
+            "description": "Telefone celular do autorizado",
+            "type": "string",
+            "maxLength": 30,
+            "example": "17999540204"
+          },
+          "CEP": {
+            "description": "CEP do endereço do autorizado",
+            "type": "string",
+            "maxLength": 9,
+            "example": "15020305"
+          },
+          "ENDERECO": {
+            "description": "Endereço do autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Rua Castro Alves"
+          },
+          "NUMERO": {
+            "description": "Número do endereço do autorizado",
+            "type": "integer",
+            "format": "int32",
+            "example": 18
+          },
+          "BAIRRO": {
+            "description": "Bairro do autorizado",
+            "type": "string",
+            "maxLength": 30,
+            "example": "São Pedro"
+          },
+          "COMPLEMENTO": {
+            "description": "Complemento do endereço do autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": ""
+          },
+          "CIDADE": {
+            "description": "Cidade do autorizado",
+            "type": "string",
+            "maxLength": 30,
+            "example": "Mirassol"
+          },
+          "UF": {
+            "description": "UF da cidade do autorizado",
+            "type": "string",
+            "maxLength": 2,
+            "example": "SP"
+          },
+          "PAIS": {
+            "description": "País do endereço do autorizado",
+            "type": "string",
+            "maxLength": 20,
+            "example": "Brasil"
+          },
+          "PROFISSAO": {
+            "description": "Profissão do autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Pedreiro"
+          },
+          "EMPRESA": {
+            "description": "Empresa em que trabalha o autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": ""
+          },
+          "FUNCAO": {
+            "description": "Função exercida na empresa em que trabalha o autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": ""
+          },
+          "PERMANENTE": {
+            "description": "Indica se é permanente a autorização",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "S",
+              "N"
+            ]
+          },
+          "DATA_INICIO_VALIDADE": {
+            "description": "Data de início da validade da autorização",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "01/01/2020"
+          },
+          "DATA_TERMINO_VALIDADE": {
+            "description": "Data do término da validade da autorização",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "30/01/2020"
+          },
+          "SEM_RESTRICAO_HORARIO": {
+            "description": "Indica se é sem restrições de dias e horários na autorização",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "S",
+              "N"
+            ]
+          },
+          "HORARIOS": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sHorarios02"
+            }
+          }
+        },
+        "required": [
+          "QUADRA",
+          "LOTE",
+          "ID_PROPRIETARIO",
+          "NOME"
+        ]
+      },
+      "sAutorizacoes_post_responses": {
+        "type": "object",
+        "properties": {
+          "ID_AUTORIZACAO": {
+            "description": "Código do cadastro de autorização",
+            "type": "integer",
+            "format": "int32",
+            "example": 12
+          },
+          "QUADRA": {
+            "description": "Quadra da autorização",
+            "type": "string",
+            "maxLength": 5,
+            "example": "BC18"
+          },
+          "LOTE": {
+            "description": "Lote da autorização",
+            "type": "string",
+            "maxLength": 5,
+            "example": "01"
+          },
+          "ID_PROPRIETARIO": {
+            "description": "Código do cadastro da pessoa que autorizou",
+            "type": "integer",
+            "format": "int32",
+            "example": 12
+          },
+          "NOME_AUTORIZADO": {
+            "description": "Nome do autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Paulo Monteiro"
+          },
+          "CPF_AUTORIZADO": {
+            "description": "CPF do autorizado",
+            "type": "string",
+            "maxLength": 11,
+            "example": "51480018653"
+          },
+          "RG_AUTORIZADO": {
+            "description": "RG do autorizado",
+            "type": "string",
+            "maxLength": 15,
+            "example": "500984"
+          },
+          "EXPEDIDOR_AUTORIZADO": {
+            "description": "Órgão expedidor do RG do autorizado",
+            "type": "string",
+            "maxLength": 10,
+            "example": "SJ"
+          },
+          "DATA_EXPEDICAO_AUTORIZADO": {
+            "description": "Data de expedição do RG do autorizado",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "12/05/1990"
+          },
+          "PERMANENTE": {
+            "description": "Indica se é permanente a autorização",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "S",
+              "N"
+            ]
+          },
+          "DATA_INICIO_VALIDADE": {
+            "description": "Data de início da validade da autorização",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "01/01/2020"
+          },
+          "DATA_TERMINO_VALIDADE": {
+            "description": "Data do término da validade da autorização",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "30/01/2020"
+          },
+          "SEM_RESTRICAO_HORARIO": {
+            "description": "Indica se é sem restrições de dias e horários na autorização",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "S",
+              "N"
+            ]
+          },
+          "HORARIOS": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sHorarios02"
+            }
+          },
+          "MENSAGEM": {
+            "description": "Mensagem",
+            "type": "string",
+            "example": "ATENÇÃO: AUTORIZAÇÕES EM FERIADOS E 2° TURNO SERÃO INSERIDAS APENAS SE O SISTEMA ESTIVER CONFIGURADO PARA PERMITIR ESSES HORÁRIOS."
+          }
+        }
+      },
+      "sAutorizacoes_put_requestBody": {
+        "type": "object",
+        "properties": {
+          "ID_AUTORIZACAO": {
+            "description": "Código do cadastro da autorização",
+            "type": "integer",
+            "format": "int32",
+            "example": 354
+          },
+          "NOME": {
+            "description": "Nome do autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Paulo Monteiro"
+          },
+          "RG": {
+            "description": "RG do autorizado",
+            "type": "string",
+            "maxLength": 15,
+            "example": "500984"
+          },
+          "EXPEDIDOR": {
+            "description": "Órgão expedidor do RG do autorizado",
+            "type": "string",
+            "maxLength": 10,
+            "example": "SJ"
+          },
+          "DATA_EXPEDICAO": {
+            "description": "Data de expedição do RG do autorizado",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "12/05/1990"
+          },
+          "CPF": {
+            "description": "CPF do autorizado",
+            "type": "string",
+            "maxLength": 11,
+            "example": "51480018653"
+          },
+          "DATA_NASCIMENTO": {
+            "description": "Data de nascimento do autorizado",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "22/10/1979"
+          },
+          "EMAIL": {
+            "description": "E-Mail do autorizado",
+            "type": "string",
+            "maxLength": 50,
+            "example": "paulomon@terra.com.br"
+          },
+          "FOTO": {
+            "description": "Foto da pessoa (* Máx. 1 mb e no formato jpg)",
+            "type": "string",
+            "format": "base64",
+            "example": ""
+          },
+          "TEL_RESIDENCIAL": {
+            "description": "Telefone residencial do autorizado",
+            "type": "string",
+            "maxLength": 30,
+            "example": "1732450054"
+          },
+          "RAMAL_TEL_RESIDENCIAL": {
+            "description": "Ramal do Telefone residencial do autorizado",
+            "type": "integer",
+            "format": "int32",
+            "example": 1
+          },
+          "TEL_COMERCIAL": {
+            "description": "Telefone comercial do autorizado",
+            "type": "string",
+            "maxLength": 30,
+            "example": "1732455887"
+          },
+          "RAMAL_TEL_COMERCIAL": {
+            "description": "Ramal do Telefone comercial do autorizado",
+            "type": "integer",
+            "format": "int32",
+            "example": 12
+          },
+          "TEL_CELULAR": {
+            "description": "Telefone celular do autorizado",
+            "type": "string",
+            "maxLength": 30,
+            "example": "17999540204"
+          },
+          "CEP": {
+            "description": "CEP do endereço do autorizado",
+            "type": "string",
+            "maxLength": 9,
+            "example": "15020305"
+          },
+          "ENDERECO": {
+            "description": "Endereço do autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Rua Castro Alves"
+          },
+          "NUMERO": {
+            "description": "Número do endereço do autorizado",
+            "type": "integer",
+            "format": "int32",
+            "example": 18
+          },
+          "BAIRRO": {
+            "description": "Bairro do autorizado",
+            "type": "string",
+            "maxLength": 30,
+            "example": "São Pedro"
+          },
+          "COMPLEMENTO": {
+            "description": "Complemento do endereço do autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": ""
+          },
+          "CIDADE": {
+            "description": "Cidade do autorizado",
+            "type": "string",
+            "maxLength": 30,
+            "example": "Mirassol"
+          },
+          "UF": {
+            "description": "UF da cidade do autorizado",
+            "type": "string",
+            "maxLength": 2,
+            "example": "SP"
+          },
+          "PROFISSAO": {
+            "description": "Profissão do autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Pedreiro"
+          },
+          "EMPRESA": {
+            "description": "Empresa em que trabalha o autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": ""
+          },
+          "FUNCAO": {
+            "description": "Função exercida na empresa em que trabalha o autorizado",
+            "type": "string",
+            "maxLength": 40,
+            "example": ""
+          },
+          "PERMANENTE": {
+            "description": "Indica se é permanente a autorização",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "S",
+              "N"
+            ]
+          },
+          "DATA_INICIO_VALIDADE": {
+            "description": "Data de início da validade da autorização",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "01/01/2020"
+          },
+          "DATA_TERMINO_VALIDADE": {
+            "description": "Data do término da validade da autorização",
+            "type": "string",
+            "format": "date",
+            "maxLength": 10,
+            "example": "30/01/2020"
+          },
+          "SEM_RESTRICAO_HORARIO": {
+            "description": "Indica se é sem restrições de dias e horários na autorização",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "S",
+              "N"
+            ]
+          },
+          "HORARIOS": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sHorarios02"
+            }
+          }
+        },
+        "required": [
+          "ID_AUTORIZACAO",
+          "NOME"
+        ]
+      },
+      "sAutorizacoes_put_responses": {
+        "type": "object",
+        "properties": {
+          "MENSAGEM": {
+            "description": "Mensagem",
+            "type": "string",
+            "example": "ATENÇÃO: AUTORIZAÇÕES EM FERIADOS E 2° TURNO SERÃO INSERIDAS APENAS SE O SISTEMA ESTIVER CONFIGURADO PARA PERMITIR ESSES HORÁRIOS."
+          },
+          "RESULTADO": {
+            "description": "Resultado",
+            "type": "string",
+            "example": "ALTERADO COM SUCESSO."
+          }
+        }
+      },
+      "sCancelarAutorizacao_put_requestBody": {
+        "type": "object",
+        "properties": {
+          "ID_AUTORIZACAO": {
+            "description": "Código do cadastro da autorização",
+            "type": "integer",
+            "format": "int32",
+            "example": 354
+          },
+          "ID_PROPRIETARIO": {
+            "description": "Código do cadastro do proprietário",
+            "type": "integer",
+            "format": "int32",
+            "example": 38
+          },
+          "QUADRA": {
+            "description": "Quadra da autorização",
+            "type": "string",
+            "maxLength": 5,
+            "example": "A058"
+          },
+          "LOTE": {
+            "description": "Lote da autorização",
+            "type": "string",
+            "maxLength": 5,
+            "example": "65"
+          },
+          "MOTIVO": {
+            "description": "Motivo do desvinculamento",
+            "type": "string",
+            "maxLength": 50,
+            "example": "Não quero mais"
+          }
+        },
+        "required": [
+          "ID_AUTORIZACAO",
+          "ID_PROPRIETARIO",
+          "QUADRA",
+          "LOTE",
+          "MOTIVO"
+        ]
+      },
+      "sCancelarAutorizacao_put_responses": {
+        "type": "object",
+        "properties": {
+          "MENSAGEM": {
+            "description": "Mensagem",
+            "type": "string",
+            "example": "AUTORIZAÇÃO DESVINCULADA."
+          }
+        }
+      },
+      "sUnidade_get_responses": {
+        "type": "object",
+        "properties": {
+          "SEQUENCIA": {
+            "description": "Sequência do cadastro de unidade",
+            "type": "integer",
+            "format": "int32",
+            "example": 365
+          },
+          "PROPRIETARIOS": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sPessoa01"
+            }
+          },
+          "LOCATARIOS": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sPessoa01"
+            }
+          },
+          "MORADORES": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sPessoa01"
+            }
+          },
+          "AUTORIZACOES": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sPessoa02"
+            }
+          },
+          "VEICULOS": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sVeiculo"
+            }
+          },
+          "ANIMAIS": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/sAnimais"
+            }
+          }
+        },
+        "required": [
+          "SEQUENCIA"
+        ]
+      },
+      "sVeiculos_post_requestBody": {
+        "type": "object",
+        "properties": {
+          "PLACA": {
+            "description": "Placa do veículo",
+            "type": "string",
+            "maxLength": 7,
+            "example": "HUN5301"
+          },
+          "QUADRA": {
+            "description": "Quadra do veículo",
+            "type": "string",
+            "maxLength": 5,
+            "example": "A06"
+          },
+          "LOTE": {
+            "description": "Lote do veículo",
+            "type": "string",
+            "maxLength": 5,
+            "example": "23"
+          },
+          "ID_PROPRIETARIO": {
+            "description": "Código do cadastro da pessoa que é o proprietário",
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          },
+          "MARCA": {
+            "description": "Marca do veículo",
+            "type": "string",
+            "maxLength": 25,
+            "example": "Honda"
+          },
+          "COR": {
+            "description": "Cor do veículo",
+            "type": "string",
+            "maxLength": 25,
+            "example": "Prata"
+          },
+          "MODELO": {
+            "description": "Modelo do veículo",
+            "type": "string",
+            "maxLength": 25,
+            "example": "City"
+          }
+        },
+        "required": [
+          "PLACA",
+          "QUADRA",
+          "LOTE",
+          "ID_PROPRIETARIO",
+          "MARCA",
+          "COR",
+          "MODELO"
+        ]
+      },
+      "sVeiculos_post_responses": {
+        "type": "object",
+        "properties": {
+          "ID_PROPRIETARIO": {
+            "description": "Código do cadastro da pessoa que é o proprietário",
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          },
+          "QUADRA": {
+            "description": "Quadra do veículo",
+            "type": "string",
+            "maxLength": 5,
+            "example": "A06"
+          },
+          "LOTE": {
+            "description": "Lote do veículo",
+            "type": "string",
+            "maxLength": 5,
+            "example": "23"
+          },
+          "PLACA": {
+            "description": "Placa do veículo",
+            "type": "string",
+            "maxLength": 7,
+            "example": "HUN5301"
+          },
+          "MARCA": {
+            "description": "Marca do veículo",
+            "type": "string",
+            "maxLength": 25,
+            "example": "Honda"
+          },
+          "MODELO": {
+            "description": "Modelo do veículo",
+            "type": "string",
+            "maxLength": 25,
+            "example": "City"
+          },
+          "COR": {
+            "description": "Cor do veículo",
+            "type": "string",
+            "maxLength": 25,
+            "example": "Prata"
+          }
+        }
+      },
+      "sVeiculos_put_requestBody": {
+        "type": "object",
+        "properties": {
+          "PLACA": {
+            "description": "Placa do veículo",
+            "type": "string",
+            "maxLength": 7,
+            "example": "HUN5301"
+          },
+          "ID_PROPRIETARIO": {
+            "description": "Código do cadastro da pessoa que é o proprietário",
+            "type": "integer",
+            "format": "int32",
+            "example": 3
+          },
+          "QUADRA": {
+            "description": "Quadra do veículo",
+            "type": "string",
+            "maxLength": 5,
+            "example": "A06"
+          },
+          "LOTE": {
+            "description": "Lote do veículo",
+            "type": "string",
+            "maxLength": 5,
+            "example": "23"
+          },
+          "MARCA": {
+            "description": "Marca do veículo",
+            "type": "string",
+            "maxLength": 25,
+            "example": "Honda"
+          },
+          "COR": {
+            "description": "Cor do veículo",
+            "type": "string",
+            "maxLength": 25,
+            "example": "Prata"
+          },
+          "MODELO": {
+            "description": "Modelo do veículo",
+            "type": "string",
+            "maxLength": 25,
+            "example": "City"
+          }
+        },
+        "required": [
+          "PLACA"
+        ]
+      },
+      "sVeiculos_put_responses": {
+        "type": "object",
+        "properties": {
+          "PLACA": {
+            "description": "Placa do veículo",
+            "type": "string",
+            "maxLength": 7,
+            "example": "HUN5301"
+          },
+          "MENSAGEM": {
+            "description": "Mensagem",
+            "type": "string",
+            "example": "VEÍCULO ALTERADO COM SUCESSO."
+          }
+        }
+      },
+      "sVeiculos_delete_responses": {
+        "type": "object",
+        "properties": {
+          "PLACA": {
+            "description": "Placa do veículo",
+            "type": "string",
+            "maxLength": 7,
+            "example": "HUN5301"
+          },
+          "MENSAGEM": {
+            "description": "Mensagem",
+            "type": "string",
+            "example": "VEÍCULO DESVINCULADO COM SUCESSO."
+          }
+        }
+      },
+      "sAnimais_post_requestBody": {
+        "type": "object",
+        "properties": {
+          "QUADRA": {
+            "description": "Quadra do animal",
+            "type": "string",
+            "maxLength": 5,
+            "example": "A06"
+          },
+          "LOTE": {
+            "description": "Lote do animal",
+            "type": "string",
+            "maxLength": 5,
+            "example": "23"
+          },
+          "NOME": {
+            "description": "Nome do animal",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Zoram"
+          },
+          "TIPO": {
+            "description": "Classificação do tipo de animal",
+            "type": "string",
+            "maxLength": 40,
+            "enum": [
+              "AVE",
+              "CACHORRO",
+              "GATO",
+              "OUTRO"
+            ]
+          },
+          "RACA": {
+            "description": "Raça do animal",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Sem raça definida"
+          },
+          "ID_MICROCHIP": {
+            "description": "Código de identificação do MicroChip",
+            "type": "string",
+            "maxLength": 20,
+            "example": "U152333"
+          },
+          "COR_PREDOMINANTE": {
+            "description": "Cor predominante do animal",
+            "type": "string",
+            "maxLength": 30,
+            "example": "Branco"
+          },
+          "SEXO": {
+            "description": "Sexo do animal",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "M",
+              "F"
+            ]
+          },
+          "DADOS_ADICIONAIS": {
+            "description": "Dados adicionais do animal",
+            "type": "string",
+            "format": "text",
+            "example": "Observação qualquer"
+          },
+          "FOTO": {
+            "description": "Foto do animal (* Máx. 1 mb e no formato jpg)",
+            "type": "string",
+            "format": "base64",
+            "example": ""
+          },
+          "DESCR_FOTO": {
+            "description": "Descrição da foto do animal",
+            "type": "string",
+            "maxLength": 30,
+            "example": "Foto do meu animal"
+          }
+        },
+        "required": [
+          "QUADRA",
+          "LOTE",
+          "NOME",
+          "TIPO",
+          "RACA",
+          "ID_MICROCHIP",
+          "COR_PREDOMINANTE",
+          "SEXO",
+          "DADOS_ADICIONAIS"
+        ]
+      },
+      "sAnimais_post_responses": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "description": "Código do cadastro do animal",
+            "type": "integer",
+            "format": "int32",
+            "example": 30
+          },
+          "QUADRA": {
+            "description": "Quadra do animal",
+            "type": "string",
+            "maxLength": 5,
+            "example": "A06"
+          },
+          "LOTE": {
+            "description": "Lote do animal",
+            "type": "string",
+            "maxLength": 5,
+            "example": "23"
+          },
+          "NOME": {
+            "description": "Nome do animal",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Zoram"
+          },
+          "TIPO": {
+            "description": "Classificação do tipo de animal",
+            "type": "string",
+            "maxLength": 40,
+            "enum": [
+              "AVE",
+              "CACHORRO",
+              "GATO",
+              "OUTRO"
+            ]
+          },
+          "RACA": {
+            "description": "Raça do animal",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Sem raça definida"
+          },
+          "ID_MICROCHIP": {
+            "description": "Código de identificação do MicroChip",
+            "type": "string",
+            "maxLength": 20,
+            "example": "U152333"
+          },
+          "COR_PREDOMINANTE": {
+            "description": "Cor predominante do animal",
+            "type": "string",
+            "maxLength": 30,
+            "example": "Branco"
+          },
+          "SEXO": {
+            "description": "Sexo do animal",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "M",
+              "F"
+            ]
+          },
+          "DADOS_ADICIONAIS": {
+            "description": "Dados adicionais do animal",
+            "type": "string",
+            "format": "text",
+            "example": "Observação qualquer"
+          },
+          "FOTO": {
+            "description": "Foto do animal (* Máx. 1 mb e no formato jpg)",
+            "type": "string",
+            "format": "base64",
+            "example": ""
+          },
+          "DESCR_FOTO": {
+            "description": "Descrição da foto do animal",
+            "type": "string",
+            "maxLength": 30,
+            "example": "Foto do meu animal"
+          }
+        }
+      },
+      "sAnimais_put_requestBody": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "description": "Código do cadastro do animal",
+            "type": "integer",
+            "format": "int32",
+            "example": 30
+          },
+          "NOME": {
+            "description": "Nome do animal",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Zoram"
+          },
+          "TIPO": {
+            "description": "Classificação do tipo de animal",
+            "type": "string",
+            "maxLength": 40,
+            "enum": [
+              "AVE",
+              "CACHORRO",
+              "GATO",
+              "OUTRO"
+            ]
+          },
+          "RACA": {
+            "description": "Raça do animal",
+            "type": "string",
+            "maxLength": 40,
+            "example": "Sem raça definida"
+          },
+          "ID_MICROCHIP": {
+            "description": "Código de identificação do MicroChip",
+            "type": "string",
+            "maxLength": 20,
+            "example": "U152333"
+          },
+          "COR_PREDOMINANTE": {
+            "description": "Cor predominante do animal",
+            "type": "string",
+            "maxLength": 30,
+            "example": "Branco"
+          },
+          "SEXO": {
+            "description": "Sexo do animal",
+            "type": "string",
+            "maxLength": 1,
+            "enum": [
+              "M",
+              "F"
+            ]
+          },
+          "DADOS_ADICIONAIS": {
+            "description": "Dados adicionais do animal",
+            "type": "string",
+            "format": "text",
+            "example": "Observação qualquer"
+          },
+          "FOTO": {
+            "description": "Foto do animal (* Máx. 1 mb e no formato jpg)",
+            "type": "string",
+            "format": "base64",
+            "example": ""
+          },
+          "DESCR_FOTO": {
+            "description": "Descrição da foto do animal",
+            "type": "string",
+            "maxLength": 30,
+            "example": "Foto do meu animal"
+          }
+        },
+        "required": [
+          "ID"
+        ]
+      },
+      "sAnimais_put_responses": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "description": "Código do cadastro do animal",
+            "type": "integer",
+            "format": "int32",
+            "example": 30
+          },
+          "MENSAGEM": {
+            "description": "Mensagem",
+            "type": "string",
+            "example": "REGISTRO ALTERADO COM SUCESSO."
+          }
+        }
+      },
+      "sAnimais_delete_responses": {
+        "type": "object",
+        "properties": {
+          "ID": {
+            "description": "Código do cadastro do animal",
+            "type": "integer",
+            "format": "int32",
+            "example": 30
+          },
+          "RESULTADO": {
+            "description": "Mensagem",
+            "type": "string",
+            "example": "REGISTRO EXCLUIDO COM SUCESSO."
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "freedomBasic": {
+        "type": "http",
+        "scheme": "basic"
+      }
+    }
+  }
+}
